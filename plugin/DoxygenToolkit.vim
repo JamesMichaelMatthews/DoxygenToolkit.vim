@@ -552,6 +552,12 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! <SID>DoxygenCommentFunc()
 
+  " Save autoindent and smartindent, and turn them off
+  let autoindentval=&autoindent
+  set noautoindent
+  let smartindentval=&smartindent
+  set nosmartindent
+
   " Initialize default templates.
   " Assure compatibility with Python for classes (cf. endDocPattern).
   let l:emptyLinePattern = '^[[:blank:]]*$'
@@ -838,6 +844,14 @@ function! <SID>DoxygenCommentFunc()
   "    call s:WarnMsg( "   - ".param )
   "  endfor
   "endif
+
+  " Reset autoindent and smartindent
+  if(autoindentval)
+    set autoindent
+  endif
+  if(smartindentval)
+    set smartindent
+  endif
 
 endfunction
 
